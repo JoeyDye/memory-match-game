@@ -15,6 +15,11 @@ function correctMatch (card1, card2) {
   card2.classList.add('deck__card--show', 'deck__card--match');
 }
 
+function incorrectMatch (card1, card2) {
+  card1.classList.replace('deck__card--open', 'deck__card--fail');
+  card2.classList.add('deck__card--show', 'deck__card--fail');
+}
+
 
 function cardMatch (evt) {
   if (evt.target.nodeName === 'LI' && clicked === true) {
@@ -22,6 +27,8 @@ function cardMatch (evt) {
     secondCardClass = secondCard.children[0].classList[1];
     if (firstCardClass === secondCardClass) {
       correctMatch(firstCard, secondCard);
+    } else {
+      incorrectMatch(firstCard, secondCard);
     }
   } else if (evt.target.nodeName === 'LI') {
     firstCard = evt.target;
