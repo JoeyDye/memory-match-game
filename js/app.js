@@ -7,17 +7,20 @@ let secondCard;
 let secondCardClass
 
 function showCard(card) {
-  card.classList.add('deck__card--show', 'deck__card--open');
+  card.classList.add('deck__card--open');
 }
 
 function correctMatch (card1, card2) {
   card1.classList.replace('deck__card--open', 'deck__card--match');
-  card2.classList.add('deck__card--show', 'deck__card--match');
+  card2.classList.add('deck__card--match');
 }
 
 function incorrectMatch (card1, card2) {
   card1.classList.replace('deck__card--open', 'deck__card--fail');
-  card2.classList.add('deck__card--show', 'deck__card--fail');
+  card2.classList.add('deck__card--fail');
+  setTimeout(function reset () {
+    card1.classList.remove('deck__card--fail');
+    card2.classList.remove('deck__card--fail');}, 2000)
 }
 
 
@@ -39,4 +42,3 @@ function cardMatch (evt) {
 }
 
 deck.addEventListener('click', cardMatch);
-

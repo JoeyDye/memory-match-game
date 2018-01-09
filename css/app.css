@@ -95,20 +95,19 @@ h1 {
 .deck__card--open {
   background: #02b3e4;
   cursor: default;
-}
-
-.deck__card--show {
   font-size: 33px;
 }
 
 .deck__card--match {
   cursor: default;
   background: #02ccba;
+  font-size: 33px;
 }
 
 .deck__card--fail {
   cursor: default;
-  background: #cc0202e5;
+  background: #f70b0bdc;
+  font-size: 33px;
 }
 
 .score--restart {
