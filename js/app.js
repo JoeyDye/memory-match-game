@@ -6,6 +6,10 @@ let firstCardClass
 let secondCard;
 let secondCardClass
 
+function showCard(card) {
+  card.classList.add('deck__card--show', 'deck__card--open');
+}
+
 function correctMatch () {
   secondCard.classList.add('deck__card--show', 'deck__card--match');
   firstCard.classList.replace('deck__card--open', 'deck__card--match');
@@ -20,9 +24,9 @@ function cardMatch (evt) {
       correctMatch();
     }
   } else if (evt.target.nodeName === 'LI') {
-    evt.target.classList.add('deck__card--show', 'deck__card--open');
     firstCard = evt.target;
     firstCardClass = firstCard.children[0].classList[1];
+    showCard(firstCard);
     clicked = true;
   }
 }
