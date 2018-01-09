@@ -10,9 +10,9 @@ function showCard(card) {
   card.classList.add('deck__card--show', 'deck__card--open');
 }
 
-function correctMatch () {
-  secondCard.classList.add('deck__card--show', 'deck__card--match');
-  firstCard.classList.replace('deck__card--open', 'deck__card--match');
+function correctMatch (card1, card2) {
+  card1.classList.replace('deck__card--open', 'deck__card--match');
+  card2.classList.add('deck__card--show', 'deck__card--match');
 }
 
 
@@ -21,7 +21,7 @@ function cardMatch (evt) {
     secondCard = evt.target;
     secondCardClass = secondCard.children[0].classList[1];
     if (firstCardClass === secondCardClass) {
-      correctMatch();
+      correctMatch(firstCard, secondCard);
     }
   } else if (evt.target.nodeName === 'LI') {
     firstCard = evt.target;
