@@ -1,11 +1,12 @@
 
-//Shake card on click
-const cardContainer = document.querySelector('.grid');
+const deck = document.querySelector('.deck');
 
-function shakeCell (evt) {
-  if (evt.target.nodeName === 'DIV') {
-    evt.target.classList.add('grid__img--shake');
+
+function cardMatch (evt) {
+  if (evt.target.nodeName === 'LI') {
+    evt.target.classList.add('deck__card--show', 'deck__card--open');
   }
 }
 
-cardContainer.addEventListener('click', shakeCell);
+deck.addEventListener('click', cardMatch);
+

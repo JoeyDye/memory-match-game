@@ -72,7 +72,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 33px;
+  font-size: 0px;
   color: rgba(3, 3, 3, 0.774);
   box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
   cursor: pointer;
@@ -93,7 +93,6 @@ h1 {
 /* Modifiers */
 
 .deck__card--open {
-  transform: rotateY('0');
   background: #02b3e4;
   cursor: default;
 }
@@ -114,7 +113,7 @@ h1 {
 }
 
 /* Shake effect from W3Schools (https://www.w3schools.com/howto/howto_css_shake_image.asp)*/
-.grid__img--shake {
+.deck__card--shake {
   animation: shake 0.5s;
   animation-iteration-count: 1;
 }
