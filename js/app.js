@@ -12,14 +12,14 @@ let secondCardClass
 // show selected card
 
 function showCard(card) {
-  card.classList.add('deck__card--open');
+  card.classList.add('deck__card--open', 'deck__card--show');
 }
 
 // Check for match
 
 function correctMatch (card1, card2) {
-  card1.classList.replace('deck__card--open', 'deck__card--match');
-  card2.classList.add('deck__card--match');
+  card1.classList.add('deck__card--match');
+  card2.classList.add('deck__card--show', 'deck__card--match');
   clicked = false;
   // Check for win
   score += 1;
@@ -31,11 +31,12 @@ function correctMatch (card1, card2) {
 // Display incorrect match
 
 function incorrectMatch (card1, card2) {
-  card1.classList.replace('deck__card--open', 'deck__card--fail');
-  card2.classList.add('deck__card--fail');
+  card1.classList.add('deck__card--fail');
+  card1.classList.remove('deck__card--open');
+  card2.classList.add('deck__card--show', 'deck__card--fail');
   setTimeout(function reset () {
-    card1.classList.remove('deck__card--fail');
-    card2.classList.remove('deck__card--fail');}, 1000)
+    card1.classList.remove('deck__card--fail', 'deck__card--show');
+    card2.classList.remove('deck__card--fail', 'deck__card--show');}, 500)
     clicked = false;
 }
 
@@ -45,6 +46,7 @@ function cardMatch (evt) {
   if (evt.target.classList.contains('deck__card--match')) {
     return
   }
+
   if (evt.target.nodeName === 'LI' && clicked === true) {
     secondCard = evt.target;
     secondCardClass = secondCard.children[0].classList[1];

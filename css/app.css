@@ -63,7 +63,7 @@ h1 {
 }
 
 .deck__card {
-  background: rgba(11, 196, 202, 0.822);
+  background: #263d4b;
   height: 125px;
   width: 125px;
   padding: 3.5rem;
@@ -73,7 +73,7 @@ h1 {
   justify-content: center;
   align-items: center;
   font-size: 0px;
-  color: rgba(3, 3, 3, 0.774);
+  color: #fff;
   box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
   cursor: pointer;
 }
@@ -95,31 +95,72 @@ h1 {
 .deck__card--open {
   background: #02b3e4;
   cursor: default;
+}
+
+.deck__card--show {
   font-size: 33px;
+  animation: flip;
+}
+
+@keyframes flip {
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+    animation-timing-function: ease-out;
+  }
+
+  40% {
+    transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+    animation-timing-function: ease-out;
+  }
+
+  50% {
+    transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+    animation-timing-function: ease-in;
+  }
+
+  80% {
+    transform: perspective(400px) scale3d(.95, .95, .95);
+    animation-timing-function: ease-in;
+  }
+
+  to {
+    transform: perspective(400px);
+    animation-timing-function: ease-in;
+  }
 }
 
 .deck__card--match {
   cursor: default;
   background: #02ccba;
   font-size: 33px;
+  animation: pulse 0.5s;
+  animation-iteration-count: 1;
 }
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
 
 .deck__card--fail {
   cursor: default;
   background: #f70b0bdc;
   font-size: 33px;
-}
-
-.score--restart {
-  float: right;
-  cursor: pointer;
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
 }
 
 /* Shake effect from W3Schools (https://www.w3schools.com/howto/howto_css_shake_image.asp)*/
-.deck__card--shake {
-  animation: shake 0.5s;
-  animation-iteration-count: 1;
-}
 
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -133,4 +174,9 @@ h1 {
   80% { transform: translate(-1px, -1px) rotate(1deg); }
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.score--restart {
+  float: right;
+  cursor: pointer;
 }
