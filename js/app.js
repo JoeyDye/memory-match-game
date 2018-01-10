@@ -1,21 +1,41 @@
 
 const deck = document.querySelector('.deck');
 const cards = deck.children;
-let score = 0;
-let matchCount = 0;
+const rating = document.querySelector('.score__stars');
+const stars = rating.children;
+let clicks = 0;
+let attempts;
 let clicked;
+let matchCount = 0;
 let firstCard;
 let firstCardClass
 let secondCard;
 let secondCardClass
 
-// show selected card
+// Keep score
+
+function score () {
+  clicks += 1;
+
+  switch (clicks) {
+    case 34:
+      stars[0].remove();
+      break;
+    case 28:
+      stars[1].remove();
+      break;
+    case 22:
+      stars[2].remove();
+  }
+}
+
+// Show selected card
 
 function showCard(card) {
   card.classList.add('deck__card--open', 'deck__card--show');
 }
 
-// Check for match
+// Display correct match
 
 function correctMatch (card1, card2) {
   card1.classList.add('deck__card--match');
@@ -40,13 +60,12 @@ function incorrectMatch (card1, card2) {
     clicked = false;
 }
 
-// Display correct match
+// Check for match
 
 function cardMatch (evt) {
   if (evt.target.classList.contains('deck__card--match')) {
     return
   }
-
   if (evt.target.nodeName === 'LI' && clicked === true) {
     secondCard = evt.target;
     secondCardClass = secondCard.children[0].classList[1];
@@ -63,6 +82,7 @@ function cardMatch (evt) {
       clicked = true;
     }
   }
+  score();
 }
 
 deck.addEventListener('click', cardMatch);
