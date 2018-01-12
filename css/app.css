@@ -95,6 +95,10 @@ h1 {
   padding-left: 15px;
 }
 
+.modal-title {
+  padding-top: 15px;
+}
+
 /* Modifiers */
 
 .deck__card--open {
@@ -105,6 +109,20 @@ h1 {
 .deck__card--show {
   font-size: 33px;
   animation: flip;
+}
+
+.btn-primary {
+  display: none;
+}
+
+.btn-info {
+  background: rgba(2, 196, 164, 0.886);
+}
+
+.fa-check {
+  color: rgba(2, 196, 164, 0.886);
+  padding-bottom: 15px;
+  font-size: 50px;
 }
 
 @keyframes flip {
@@ -138,8 +156,42 @@ h1 {
   cursor: default;
   background: #02ccba;
   font-size: 33px;
-  animation: pulse 0.5s;
+  animation: rubberBand 0.5s;
   animation-iteration-count: 1;
+}
+
+@keyframes rubberBand {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    transform: scale3d(.95, 1.05, 1);
+  }
+
+  75% {
+    transform: scale3d(1.05, .95, 1);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.fa-check {
+  animation: pulse;
 }
 
 @keyframes pulse {

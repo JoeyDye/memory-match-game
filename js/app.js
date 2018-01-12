@@ -3,6 +3,11 @@ const deck = document.querySelector('.deck');
 const cards = deck.children;
 const rating = document.querySelector('.score__stars');
 const stars = rating.children;
+const moves = document.querySelector('.score__moves');
+const modal = document.querySelector('.modal-body');
+const timer = document.querySelector('.score__timer');
+const reset = document.querySelector('.score__restart');
+const playAgain = document.querySelector('.play-again');
 let starCount = 3;
 let score = 0;
 let clicks = 0;
@@ -28,7 +33,7 @@ function setTime () {
 }
 
 function pad (val) {
-  var valString = val + "";
+  let valString = val + "";
   if (valString.length < 2) {
     return "0" + valString;
   } else {
@@ -60,10 +65,50 @@ function getTime () {
   return `${minutes}:${seconds}`
 }
 
+/*
+ * Reset game
+ */
+
+const resetGame = () => {
+  // Reset cards
+  for (let value of cards) {
+    value.classList.remove('deck__card--open', 'deck__card--show', 'deck__card--match');
+  }
+
+  // Reset moves
+  moveCount = 0;
+  moves.innerText = moveCount;
+
+  // Reset time 
+  totalSeconds = 0;
+
+  // Reset stars
+
+  for (let i = 0; i < 3; i++) {
+    stars[i].removeChild(stars[i].firstChild);
+  }
+
+  for (let val of stars) {
+    val.innerHTML = '<i class="far fa-star"></i>';
+  }
+
+  starCount = 3;
+
+  // Reset score
+
+  score = 0;
+
+  // Hide modal
+
+  $('#myModal').modal('hide')
+
+}
+
 // Keep score
 
-function starRating () {
+const starRating = () => {
   moveCount += 1;
+  moves.innerText = moveCount;
 
   switch (moveCount) {
     case 17:
@@ -82,33 +127,34 @@ function starRating () {
 
 // Show selected card
 
-function showCard(card) {
+const showCard = (card) => {
   card.classList.add('deck__card--open', 'deck__card--show');
 }
 
 // Display correct match
 
-function correctMatch (card1, card2) {
+const correctMatch = (card1, card2) => {
   card1.classList.add('deck__card--match');
   card2.classList.add('deck__card--show', 'deck__card--match');
   clicked = false;
   // Check for win
   score += 1;
   if (score > 7) { 
-    starRating()
     let time = getTime();
-    alert(`Congratulations! You won! With ${moveCount} moves and ${starCount} stars. It took you ${time}. Woooooo!`);
+    modal.innerHTML = `<p><strong>With ${starCount} stars in ${time}.</strong></p><p>Way to go!</p>`;
+    $('#myModal').modal('show')
+    // alert(``);
   }
 }
 
 // Display incorrect match
 
-function incorrectMatch (card1, card2) {
+const incorrectMatch = (card1, card2)  => {
   card1.classList.add('deck__card--fail');
   card1.classList.remove('deck__card--open');
   card2.classList.add('deck__card--show', 'deck__card--fail');
   // Add delay
-  setTimeout(function reset () {
+  setTimeout( () => {
     card1.classList.remove('deck__card--fail', 'deck__card--show');
     card2.classList.remove('deck__card--fail', 'deck__card--show');}, 500)
     clicked = false;
@@ -116,7 +162,7 @@ function incorrectMatch (card1, card2) {
 
 // Check for match
 
-function cardMatch (evt) {
+const cardMatch = (evt) => {
    if (evt.target.nodeName === 'LI' && clicked === true && evt.target.classList.contains('deck__card--match') === false && evt.target.classList.contains('deck__card--show') === false) {
      secondCard = evt.target;
      secondCardClass = secondCard.children[0].classList[1];
@@ -137,3 +183,5 @@ function cardMatch (evt) {
  }
 
 deck.addEventListener('click', cardMatch);
+reset.addEventListener('click', resetGame);
+playAgain.addEventListener('click', resetGame);
