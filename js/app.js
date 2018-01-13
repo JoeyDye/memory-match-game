@@ -234,9 +234,9 @@ const cardMatch = evt => {
        clicked = true;
      }
    }
+  timerStart = setInterval(setTime, 1000);
  }
 
-timerStart = setInterval(setTime, 1000);
 shuffleCards();
 deck.addEventListener('click', cardMatch);
 reset.addEventListener('click', resetGame);

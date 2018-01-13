@@ -256,9 +256,14 @@ h1 {
   cursor: pointer;
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 375px) {
   .deck {
-    justify-content: center;
-    padding: 30px;
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 376px) and (max-width: 414px) {
+  .deck {
+    padding: 2.25rem;
   }
 }
