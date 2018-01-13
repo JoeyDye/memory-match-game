@@ -3,13 +3,17 @@ const deck = document.querySelector('.deck');
 const cards = deck.children;
 const rating = document.querySelector('.score__stars');
 const stars = rating.children;
-let star;
-let starText = 'stars';
 const moves = document.querySelector('.score__moves');
 const modal = document.querySelector('.modal-body');
 const timer = document.querySelector('.score__timer');
 const reset = document.querySelector('.score__restart');
 const playAgain = document.querySelector('.play-again');
+let timerStart;
+let minutesLabel = document.getElementById("minutes");
+let secondsLabel = document.getElementById("seconds");
+let totalSeconds = 0;
+let star;
+let starText = 'stars';
 let newCards = [];
 let starCount = 3;
 let score = 0;
@@ -22,9 +26,6 @@ let firstCard;
 let firstCardClass
 let secondCard;
 let secondCardClass
-let minutesLabel = document.getElementById("minutes");
-let secondsLabel = document.getElementById("seconds");
-let totalSeconds = 0;
 
 /*
  * Timer (reference: https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript)
@@ -111,7 +112,8 @@ const resetGame = () => {
   moveCount = 0;
   moves.innerText = moveCount;
 
-  // Reset time 
+  // Reset timer
+  timerStart = setInterval(setTime, 1000);
   totalSeconds = 0;
 
   // Reset stars
@@ -121,7 +123,7 @@ const resetGame = () => {
   }
 
   for (let val of stars) {
-    val.innerHTML = '<i class="far fa-star"></i>';
+    val.innerHTML = '<i class="fas fa-star"></i>';
   }
 
   starCount = 3;
@@ -188,6 +190,7 @@ const correctMatch = (card1, card2) => {
   // Check for win
   score += 1;
   if (score > 7) { 
+    clearInterval(timerStart);
     let time = getTime();
     if (starCount === 1) {
       starText = 'star';
@@ -233,7 +236,7 @@ const cardMatch = evt => {
    }
  }
 
-setInterval(setTime, 1000);
+timerStart = setInterval(setTime, 1000);
 shuffleCards();
 deck.addEventListener('click', cardMatch);
 reset.addEventListener('click', resetGame);
