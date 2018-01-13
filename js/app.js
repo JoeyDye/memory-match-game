@@ -3,11 +3,13 @@ const deck = document.querySelector('.deck');
 const cards = deck.children;
 const rating = document.querySelector('.score__stars');
 const stars = rating.children;
+let starText = 'stars';
 const moves = document.querySelector('.score__moves');
 const modal = document.querySelector('.modal-body');
 const timer = document.querySelector('.score__timer');
 const reset = document.querySelector('.score__restart');
 const playAgain = document.querySelector('.play-again');
+let newCards = [];
 let starCount = 3;
 let score = 0;
 let clicks = 0;
@@ -23,7 +25,10 @@ let minutesLabel = document.getElementById("minutes");
 let secondsLabel = document.getElementById("seconds");
 let totalSeconds = 0;
 
-// Timer (from https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript)
+/*
+ * Timer (reference: https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript)
+ */
+
 setInterval(setTime, 1000);
 
 function setTime () {
@@ -41,22 +46,42 @@ function pad (val) {
   }
 }
 
-// shuffle deck (Fisher-Yates shuffle from https://www.frankmitchell.org/2015/01/fisher-yates/)
+/*
+ * Shuffle cards
+ */
 
-function shuffle (array) {
-  var i = 0
-    , j = 0
-    , temp = null
+const shuffleCards = () => {
 
-  for (i = array.length - 1; i > 0; i -= 1) {
-    j = Math.floor(Math.random() * (i + 1))
-    temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
+  for (let val of cards) {
+    let card = val.innerHTML;
+    newCards.push(card);
+  }
+
+  // shuffle deck (reference: Fisher-Yates shuffle from https://www.frankmitchell.org/2015/01/fisher-yates/)
+
+  shuffle(newCards);
+
+  for (let i = 0; i < 16; i++) {
+    cards[i].innerHTML = newCards[i];
+  }
+
+  function shuffle (array) {
+    let i = 0;
+    let j = 0;
+    let temp = null;
+
+    for (i = array.length - 1; i > 0; i -= 1) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
   }
 }
 
-// Get current game time
+/*
+ * Get current game time
+ */
 
 function getTime () {
   let minutes = minutesLabel.innerText;
@@ -70,6 +95,13 @@ function getTime () {
  */
 
 const resetGame = () => {
+
+  // Shuffle cards
+
+    newCards = [];
+
+    shuffleCards();
+
   // Reset cards
   for (let value of cards) {
     value.classList.remove('deck__card--open', 'deck__card--show', 'deck__card--match');
@@ -102,36 +134,46 @@ const resetGame = () => {
 
   $('#myModal').modal('hide')
 
+  // Reset clicks
+
+  clicked = false;
+
 }
 
-// Keep score
+/*
+ * Keep score
+ */
 
 const starRating = () => {
   moveCount += 1;
   moves.innerText = moveCount;
 
   switch (moveCount) {
-    case 17:
+    case 30:
       stars[0].removeChild(stars[0].firstChild);
       starCount--
       break;
-    case 14:
+    case 25:
       stars[1].removeChild(stars[1].firstChild);
       starCount--
       break;
-    case 11:
+    case 20:
       stars[2].removeChild(stars[2].firstChild);
       starCount--
   }
 }
 
-// Show selected card
+/*
+ * Show selected card
+ */
 
 const showCard = (card) => {
   card.classList.add('deck__card--open', 'deck__card--show');
 }
 
-// Display correct match
+/*
+ * Display correct match
+ */
 
 const correctMatch = (card1, card2) => {
   card1.classList.add('deck__card--match');
@@ -141,13 +183,18 @@ const correctMatch = (card1, card2) => {
   score += 1;
   if (score > 7) { 
     let time = getTime();
-    modal.innerHTML = `<p><strong>With ${starCount} stars in ${time}.</strong></p><p>Way to go!</p>`;
+    if (starCount === 1) {
+      starText = 'star';
+    }
+    modal.innerHTML = `<p><strong>With ${starCount} ${starText}. It took you ${time}.</strong></p><p>Way to go!</p>`;
     $('#myModal').modal('show')
     // alert(``);
   }
 }
 
-// Display incorrect match
+/*
+ * Display incorrect match
+ */
 
 const incorrectMatch = (card1, card2)  => {
   card1.classList.add('deck__card--fail');
@@ -160,7 +207,9 @@ const incorrectMatch = (card1, card2)  => {
     clicked = false;
 }
 
-// Check for match
+/*
+ * Check for match
+ */
 
 const cardMatch = (evt) => {
    if (evt.target.nodeName === 'LI' && clicked === true && evt.target.classList.contains('deck__card--match') === false && evt.target.classList.contains('deck__card--show') === false) {
@@ -182,6 +231,7 @@ const cardMatch = (evt) => {
    }
  }
 
+shuffleCards();
 deck.addEventListener('click', cardMatch);
 reset.addEventListener('click', resetGame);
 playAgain.addEventListener('click', resetGame);
