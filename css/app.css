@@ -258,19 +258,3 @@ h1 {
   display: inline-block;
   cursor: pointer;
 }
-
-@media screen and (max-width: 375px) {
-  h1 {
-    font-size: 40px;
-  }
-
-  .deck {
-    padding: 1.5rem;
-  }
-}
-
-@media screen and (min-width: 376px) and (max-width: 414px) {
-  .deck {
-    padding: 2.25rem;
-  }
-}

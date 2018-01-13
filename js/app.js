@@ -5,16 +5,18 @@ const rating = document.querySelector('.score__stars');
 const stars = rating.children;
 const moves = document.querySelector('.score__moves');
 const modal = document.querySelector('.modal-body');
-const timer = document.querySelector('.score__timer');
+const timer = document.querySelector('#score__timer');
 const reset = document.querySelector('.score__restart');
 const playAgain = document.querySelector('.play-again');
+let isTimerOn = false;
+let timerVar;
 let startTime = true;
 let timerStart;
+let time;
 let minutesLabel = document.getElementById("minutes");
 let secondsLabel = document.getElementById("seconds");
 let totalSeconds = 0;
 let star;
-let starText = 'stars';
 let newCards = [];
 let starCount = 3;
 let score = 0;
@@ -29,22 +31,31 @@ let secondCard;
 let secondCardClass
 
 /*
- * Timer (reference: https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript)
+ * Timer
  */
 
-const setTime = () => {
-  ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+function startTimer () {
+  timerVar = setInterval(countTimer, 1000);
 }
 
-const pad = val => {
-  let valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
+function countTimer () {
+  ++totalSeconds;
+  let minutes = Math.floor(totalSeconds / 60); // Count minutes
+  let seconds = totalSeconds - (minutes * 60); // Count seconds
+
+  if (minutes < 10) {
+    minutes = `0${minutes}`
   }
+
+  if (seconds < 10) {
+    seconds = `0${seconds}`
+  }
+
+  let time = timer.innerHTML = `${minutes}:${seconds}`; // Put results in div called timer
+}
+
+function stopTimer () {
+  clearInterval(timerVar);
 }
 
 /*
@@ -86,10 +97,8 @@ const shuffleCards = () => {
  */
 
 const getTime = () => {
-  let minutes = minutesLabel.innerText;
-  let seconds = secondsLabel.innerText;
-
-  return `${minutes}:${seconds}`
+  let finishTime = timer.innerText;
+  return finishTime;
 }
 
 /*
@@ -114,7 +123,9 @@ const resetGame = () => {
   moves.innerText = moveCount;
 
   // Reset timer
-  totalSeconds = 0;
+  stopTimer();
+  isTimerOn = false;
+  timer.innerHTML = `00:00`
 
   // Reset stars
 
@@ -190,12 +201,9 @@ const correctMatch = (card1, card2) => {
   // Check for win
   score += 1;
   if (score > 7) { 
-    clearInterval(timerStart);
-    let time = getTime();
-    if (starCount === 1) {
-      starText = 'star';
-    }
-    modal.innerHTML = `<p><strong>With ${starCount} ${starText} in ${time}.</strong></p><p>Way to go!</p>`;
+    stopTimer();
+    time = getTime();
+    modal.innerHTML = `<p><strong>Time:</strong> ${time}</p><p><strong>Stars:</strong> ${starCount}</p><p><strong>Moves:</strong> ${moveCount}</p>`;
     $('#myModal').modal('show')
     // alert(``);
   }
@@ -221,9 +229,10 @@ const incorrectMatch = (card1, card2)  => {
  */
 
 const cardMatch = evt => {
-  if (startTime === true) {
-    timerStart = setInterval(setTime, 1000);
-    startTime = false;
+  if (!isTimerOn) {
+    totalSeconds = 0;
+    startTimer();
+    isTimerOn = true;
   }
   if (evt.target.nodeName === 'LI' && clicked === true && evt.target.classList.contains('deck__card--match') === false && evt.target.classList.contains('deck__card--show') === false) {
     secondCard = evt.target;
