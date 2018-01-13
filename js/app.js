@@ -3,6 +3,7 @@ const deck = document.querySelector('.deck');
 const cards = deck.children;
 const rating = document.querySelector('.score__stars');
 const stars = rating.children;
+let star;
 let starText = 'stars';
 const moves = document.querySelector('.score__moves');
 const modal = document.querySelector('.modal-body');
@@ -45,35 +46,36 @@ const pad = val => {
 }
 
 /*
+ * shuffle (reference: Fisher-Yates shuffle from https://www.frankmitchell.org/2015/01/fisher-yates/)
+ */
+
+const shuffle = array => {
+  let i = 0;
+  let j = 0;
+  let temp = null;
+
+  for (i = array.length - 1; i > 0; i -= 1) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+/*
  * Shuffle cards
  */
 
 const shuffleCards = () => {
-
   for (let val of cards) {
     let card = val.innerHTML;
     newCards.push(card);
   }
 
-  // shuffle deck (reference: Fisher-Yates shuffle from https://www.frankmitchell.org/2015/01/fisher-yates/)
-
   shuffle(newCards);
 
   for (let i = 0; i < 16; i++) {
     cards[i].innerHTML = newCards[i];
-  }
-
-  const shuffle = array => {
-    let i = 0;
-    let j = 0;
-    let temp = null;
-
-    for (i = array.length - 1; i > 0; i -= 1) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
   }
 }
 
@@ -96,9 +98,9 @@ const resetGame = () => {
 
   // Shuffle cards
 
-    newCards = [];
+  newCards = [];
 
-    shuffleCards();
+  shuffleCards();
 
   // Reset cards
   for (let value of cards) {
@@ -114,8 +116,8 @@ const resetGame = () => {
 
   // Reset stars
 
-  for (let i = 0; i < 3; i++) {
-    stars[i].removeChild(stars[i].firstChild);
+  for (let val of stars) {
+    val.removeChild(val.firstChild);
   }
 
   for (let val of stars) {
@@ -147,16 +149,22 @@ const starRating = () => {
   moves.innerText = moveCount;
 
   switch (moveCount) {
-    case 30:
-      stars[0].removeChild(stars[0].firstChild);
+    case 20:
+      star = stars[2].firstElementChild;
+      star.remove();
+      stars[2].innerHTML = '<i class="far fa-star"></i>'
       starCount--
       break;
     case 25:
-      stars[1].removeChild(stars[1].firstChild);
+      star = stars[1].firstElementChild;
+      star.remove();
+      stars[1].innerHTML = '<i class="far fa-star"></i>'
       starCount--
       break;
-    case 20:
-      stars[2].removeChild(stars[2].firstChild);
+    case 30:
+      star = stars[0].firstElementChild;
+      star.remove();
+      stars[0].innerHTML = '<i class="far fa-star"></i>'
       starCount--
   }
 }
@@ -184,7 +192,7 @@ const correctMatch = (card1, card2) => {
     if (starCount === 1) {
       starText = 'star';
     }
-    modal.innerHTML = `<p><strong>With ${starCount} ${starText}. It took you ${time}.</strong></p><p>Way to go!</p>`;
+    modal.innerHTML = `<p><strong>With ${starCount} ${starText} in ${time}.</strong></p><p>Way to go!</p>`;
     $('#myModal').modal('show')
     // alert(``);
   }
@@ -213,11 +221,7 @@ const cardMatch = evt => {
    if (evt.target.nodeName === 'LI' && clicked === true && evt.target.classList.contains('deck__card--match') === false && evt.target.classList.contains('deck__card--show') === false) {
      secondCard = evt.target;
      secondCardClass = secondCard.children[0].classList[1];
-     if (firstCardClass === secondCardClass) {
-       correctMatch(firstCard, secondCard);
-     } else {
-       incorrectMatch(firstCard, secondCard);
-     }
+     firstCardClass === secondCardClass ? correctMatch(firstCard, secondCard) : incorrectMatch(firstCard, secondCard);
      starRating();
    } else {
      if (evt.target.nodeName === 'LI') {
