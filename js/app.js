@@ -29,15 +29,13 @@ let totalSeconds = 0;
  * Timer (reference: https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript)
  */
 
-setInterval(setTime, 1000);
-
-function setTime () {
+const setTime = () => {
   ++totalSeconds;
   secondsLabel.innerHTML = pad(totalSeconds % 60);
   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
 }
 
-function pad (val) {
+const pad = val => {
   let valString = val + "";
   if (valString.length < 2) {
     return "0" + valString;
@@ -65,7 +63,7 @@ const shuffleCards = () => {
     cards[i].innerHTML = newCards[i];
   }
 
-  function shuffle (array) {
+  const shuffle = array => {
     let i = 0;
     let j = 0;
     let temp = null;
@@ -83,7 +81,7 @@ const shuffleCards = () => {
  * Get current game time
  */
 
-function getTime () {
+const getTime = () => {
   let minutes = minutesLabel.innerText;
   let seconds = secondsLabel.innerText;
 
@@ -211,7 +209,7 @@ const incorrectMatch = (card1, card2)  => {
  * Check for match
  */
 
-const cardMatch = (evt) => {
+const cardMatch = evt => {
    if (evt.target.nodeName === 'LI' && clicked === true && evt.target.classList.contains('deck__card--match') === false && evt.target.classList.contains('deck__card--show') === false) {
      secondCard = evt.target;
      secondCardClass = secondCard.children[0].classList[1];
@@ -231,6 +229,7 @@ const cardMatch = (evt) => {
    }
  }
 
+setInterval(setTime, 1000);
 shuffleCards();
 deck.addEventListener('click', cardMatch);
 reset.addEventListener('click', resetGame);
