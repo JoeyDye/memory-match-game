@@ -31,7 +31,8 @@ body {
 }
 
 h1 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Bungee Shade', cursive;
+  font-size: 45px;
   font-weight: 300;
   padding-top: 15px;
 }
@@ -47,12 +48,14 @@ h1 {
   margin: 0 0 3em;
   padding: 32px;
   border-radius: 10px;
-  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+  background: linear-gradient(160deg, #01eeda 0%, #bb8be2 100%);
   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5s);
 }
 
 .score {
   width: 345px;
+  display: flex;
+  justify-content: space-around;
   margin-bottom: 10px;
   text-align: center;
 }
@@ -113,33 +116,33 @@ h1 {
 
 .deck__card--show {
   font-size: 33px;
-  animation: flip;
+  animation: flipInY 0.5s;
+  animation-iteration-count: 1;
 }
 
-@keyframes flip {
+@keyframes flipInY {
   from {
-    transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
-    animation-timing-function: ease-out;
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
   }
 
   40% {
-    transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
-    animation-timing-function: ease-out;
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    animation-timing-function: ease-in;
   }
 
-  50% {
-    transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
-    animation-timing-function: ease-in;
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1;
   }
 
   80% {
-    transform: perspective(400px) scale3d(.95, .95, .95);
-    animation-timing-function: ease-in;
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
   }
 
   to {
     transform: perspective(400px);
-    animation-timing-function: ease-in;
   }
 }
 
@@ -251,12 +254,16 @@ h1 {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-.score--restart {
-  float: right;
+.score__restart {
+  display: inline-block;
   cursor: pointer;
 }
 
 @media screen and (max-width: 375px) {
+  h1 {
+    font-size: 40px;
+  }
+
   .deck {
     padding: 1.5rem;
   }

@@ -8,6 +8,7 @@ const modal = document.querySelector('.modal-body');
 const timer = document.querySelector('.score__timer');
 const reset = document.querySelector('.score__restart');
 const playAgain = document.querySelector('.play-again');
+let startTime = true;
 let timerStart;
 let minutesLabel = document.getElementById("minutes");
 let secondsLabel = document.getElementById("seconds");
@@ -113,7 +114,6 @@ const resetGame = () => {
   moves.innerText = moveCount;
 
   // Reset timer
-  timerStart = setInterval(setTime, 1000);
   totalSeconds = 0;
 
   // Reset stars
@@ -221,23 +221,28 @@ const incorrectMatch = (card1, card2)  => {
  */
 
 const cardMatch = evt => {
-   if (evt.target.nodeName === 'LI' && clicked === true && evt.target.classList.contains('deck__card--match') === false && evt.target.classList.contains('deck__card--show') === false) {
-     secondCard = evt.target;
-     secondCardClass = secondCard.children[0].classList[1];
-     firstCardClass === secondCardClass ? correctMatch(firstCard, secondCard) : incorrectMatch(firstCard, secondCard);
-     starRating();
-   } else {
-     if (evt.target.nodeName === 'LI') {
-       firstCard = evt.target;
-       firstCardClass = firstCard.children[0].classList[1];
-       showCard(firstCard);
-       clicked = true;
-     }
+  if (startTime === true) {
+    timerStart = setInterval(setTime, 1000);
+    startTime = false;
+  }
+  if (evt.target.nodeName === 'LI' && clicked === true && evt.target.classList.contains('deck__card--match') === false && evt.target.classList.contains('deck__card--show') === false) {
+    secondCard = evt.target;
+    secondCardClass = secondCard.children[0].classList[1];
+    firstCardClass === secondCardClass ? correctMatch(firstCard, secondCard) : incorrectMatch(firstCard, secondCard);
+    starRating();
+  } else {
+    if (evt.target.nodeName === 'LI') {
+      firstCard = evt.target;
+      firstCardClass = firstCard.children[0].classList[1];
+      showCard(firstCard);
+      clicked = true;
+    }
    }
-  timerStart = setInterval(setTime, 1000);
  }
 
 shuffleCards();
 deck.addEventListener('click', cardMatch);
 reset.addEventListener('click', resetGame);
 playAgain.addEventListener('click', resetGame);
+
+
