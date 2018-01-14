@@ -37,11 +37,11 @@ const countTimer = () => {
   let seconds = totalSeconds - (minutes * 60); // Count seconds
 
   if (minutes < 10) {
-    minutes = `0${minutes}`
+    minutes = `0${minutes}`;
   }
 
   if (seconds < 10) {
-    seconds = `0${seconds}`
+    seconds = `0${seconds}`;
   }
 
   time = timer.innerHTML = `${minutes}:${seconds}`; // Put results in div called timer
@@ -121,7 +121,7 @@ const resetGame = () => {
 
   stopTimer();
   isTimerOn = false;
-  timer.innerHTML = `00:00`
+  timer.innerHTML = `00:00`;
 
   // Reset stars
 
@@ -141,7 +141,7 @@ const resetGame = () => {
 
   // Hide modal
 
-  $('#myModal').modal('hide')
+  $('#my-modal').modal('hide');
 
   // Reset clicks
 
@@ -161,20 +161,20 @@ const starRating = () => {
     case 20:
       star = stars[2].firstElementChild;
       star.remove();
-      stars[2].innerHTML = '<i class="far fa-star"></i>'
-      starCount--
+      stars[2].innerHTML = '<i class="far fa-star"></i>';
+      starCount--;
       break;
     case 25:
       star = stars[1].firstElementChild;
       star.remove();
       stars[1].innerHTML = '<i class="far fa-star"></i>'
-      starCount--
+      starCount--;
       break;
     case 30:
       star = stars[0].firstElementChild;
       star.remove();
-      stars[0].innerHTML = '<i class="far fa-star"></i>'
-      starCount--
+      stars[0].innerHTML = '<i class="far fa-star"></i>';
+      starCount--;
   }
 }
 
@@ -202,7 +202,7 @@ const correctMatch = (card1, card2) => {
     stopTimer();
     time = getTime();
     modal.innerHTML = `<p><strong>Time:</strong> ${time}</p><p><strong>Stars:</strong> ${starCount}</p><p><strong>Moves:</strong> ${moveCount}</p>`;
-    $('#myModal').modal('show')
+    $('#my-modal').modal('show');
     // alert(``);
   }
 }
