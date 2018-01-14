@@ -141,7 +141,7 @@ const resetGame = () => {
 
   // Hide modal
 
-  $('#my-modal').modal('hide');
+  $('#success-modal').modal('hide');
 
   // Reset clicks
 
@@ -202,7 +202,7 @@ const correctMatch = (card1, card2) => {
     stopTimer();
     time = getTime();
     modal.innerHTML = `<p><strong>Time:</strong> ${time}</p><p><strong>Stars:</strong> ${starCount}</p><p><strong>Moves:</strong> ${moveCount}</p>`;
-    $('#my-modal').modal('show');
+    $('#success-modal').modal('show');
     // alert(``);
   }
 }

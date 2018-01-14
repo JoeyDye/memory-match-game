@@ -226,10 +226,6 @@ h1 {
   display: none;
 }
 
-.btn-primary {
-  background: rgba(2, 196, 164, 0.886);
-}
-
 .check {
   color: rgba(2, 196, 164, 0.886);
   padding-bottom: 15px;
