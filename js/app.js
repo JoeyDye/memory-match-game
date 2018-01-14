@@ -8,6 +8,7 @@ const modal = document.querySelector('.modal-body');
 const timer = document.querySelector('#score__timer');
 const reset = document.querySelector('.score__restart');
 const playAgain = document.querySelector('.play-again');
+let win;
 let time;
 let isTimerOn = false;
 let timerVar;
@@ -158,19 +159,19 @@ const starRating = () => {
   moves.innerText = moveCount;
 
   switch (moveCount) {
-    case 20:
+    case 15:
       star = stars[2].firstElementChild;
       star.remove();
       stars[2].innerHTML = '<i class="far fa-star"></i>';
       starCount--;
       break;
-    case 25:
+    case 20:
       star = stars[1].firstElementChild;
       star.remove();
       stars[1].innerHTML = '<i class="far fa-star"></i>'
       starCount--;
       break;
-    case 30:
+    case 25:
       star = stars[0].firstElementChild;
       star.remove();
       stars[0].innerHTML = '<i class="far fa-star"></i>';
@@ -199,11 +200,11 @@ const correctMatch = (card1, card2) => {
 
   score++;
   if (score > 7) {
+    win = true;
     stopTimer();
     time = getTime();
     modal.innerHTML = `<p><strong>Time:</strong> ${time}</p><p><strong>Stars:</strong> ${starCount}</p><p><strong>Moves:</strong> ${moveCount}</p>`;
     $('#success-modal').modal('show');
-    // alert(``);
   }
 }
 
@@ -239,7 +240,9 @@ const cardMatch = evt => {
     secondCard = evt.target;
     secondCardClass = secondCard.children[0].classList[1];
     firstCardClass === secondCardClass ? correctMatch(firstCard, secondCard) : incorrectMatch(firstCard, secondCard);
-    starRating();
+    if (win === false) {
+      starRating();
+    }
   } else {
     if (evt.target.nodeName === 'LI') {
       firstCard = evt.target;
