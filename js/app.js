@@ -170,12 +170,6 @@ const starRating = () => {
       star.remove();
       stars[1].innerHTML = '<i class="far fa-star"></i>'
       starCount--;
-      break;
-    case 25:
-      star = stars[0].firstElementChild;
-      star.remove();
-      stars[0].innerHTML = '<i class="far fa-star"></i>';
-      starCount--;
   }
 }
 
