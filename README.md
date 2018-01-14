@@ -5,16 +5,16 @@ If both cards match, the cards remain face up and game play continues. If the ca
 
 ## Rules
 
-After a certain number of moves a star will be deducted from the overall star rating until the star rating totals 0.
+After a certain number of moves a star will be deducted from the overall star rating until the star rating totals 1.
 
 The game can be reset at anytime
 
 ## Dependencies
 
-* Bootstrap
-* Google Fonts
-* JQuery
-* Font Awesome 5
+* [Bootstrap]
+* [Google Fonts]
+* [jQuery]
+* [Font Awesome 5]
 
 ## Author
 [Joey Dye]
@@ -22,6 +22,14 @@ The game can be reset at anytime
 ## Acknowlegements
 * Thanks to [Frank Mitchel] for the article on the Fisher-Yates Shuffle.
 * Thanks to Daniel Eden for Animate.CSS.
+
+[Bootstrap]:https://getbootstrap.com/
+
+[Google Fonts]:https://fonts.google.com/
+
+[jQuery]:https://jquery.com/
+
+[Font Awesome 5]:https://fontawesome.com/
 
 [Frank Mitchel]:https://www.frankmitchell.org/2015/01/fisher-yates/
 
