@@ -244,7 +244,7 @@ const cardMatch = evt => {
       starRating();
     }
   } else {
-    if (evt.target.nodeName === 'LI') {
+    if (evt.target.nodeName === 'LI' && evt.target.classList.contains('deck__card--match') === false) {
       firstCard = evt.target;
       firstCardClass = firstCard.children[0].classList[1];
       showCard(firstCard);
