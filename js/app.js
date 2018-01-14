@@ -8,23 +8,16 @@ const modal = document.querySelector('.modal-body');
 const timer = document.querySelector('#score__timer');
 const reset = document.querySelector('.score__restart');
 const playAgain = document.querySelector('.play-again');
+let time;
 let isTimerOn = false;
 let timerVar;
-let startTime = true;
-let timerStart;
-let time;
-let minutesLabel = document.getElementById("minutes");
-let secondsLabel = document.getElementById("seconds");
 let totalSeconds = 0;
 let star;
-let newCards = [];
 let starCount = 3;
 let score = 0;
-let clicks = 0;
 let moveCount = 0;
-let attempts;
 let clicked;
-let matchCount = 0;
+let newCards = [];
 let firstCard;
 let firstCardClass
 let secondCard;
@@ -34,11 +27,11 @@ let secondCardClass
  * Timer
  */
 
-function startTimer () {
-  timerVar = setInterval(countTimer, 1000);
+const startTimer = () => {
+  timerVar = setInterval(countTimer, 1000); // Start timer
 }
 
-function countTimer () {
+const countTimer = () => {
   ++totalSeconds;
   let minutes = Math.floor(totalSeconds / 60); // Count minutes
   let seconds = totalSeconds - (minutes * 60); // Count seconds
@@ -51,15 +44,15 @@ function countTimer () {
     seconds = `0${seconds}`
   }
 
-  let time = timer.innerHTML = `${minutes}:${seconds}`; // Put results in div called timer
+  time = timer.innerHTML = `${minutes}:${seconds}`; // Put results in div called timer
 }
 
-function stopTimer () {
-  clearInterval(timerVar);
+const stopTimer = () => {
+  clearInterval(timerVar); // Stop timer
 }
 
 /*
- * shuffle (reference: Fisher-Yates shuffle from https://www.frankmitchell.org/2015/01/fisher-yates/)
+ * Shuffle (reference: Fisher-Yates shuffle from https://www.frankmitchell.org/2015/01/fisher-yates/)
  */
 
 const shuffle = array => {
@@ -114,15 +107,18 @@ const resetGame = () => {
   shuffleCards();
 
   // Reset cards
+
   for (let value of cards) {
     value.classList.remove('deck__card--open', 'deck__card--show', 'deck__card--match');
   }
 
   // Reset moves
+
   moveCount = 0;
   moves.innerText = moveCount;
 
   // Reset timer
+
   stopTimer();
   isTimerOn = false;
   timer.innerHTML = `00:00`
@@ -158,7 +154,7 @@ const resetGame = () => {
  */
 
 const starRating = () => {
-  moveCount += 1;
+  moveCount++;
   moves.innerText = moveCount;
 
   switch (moveCount) {
@@ -198,9 +194,11 @@ const correctMatch = (card1, card2) => {
   card1.classList.add('deck__card--match');
   card2.classList.add('deck__card--show', 'deck__card--match');
   clicked = false;
+
   // Check for win
-  score += 1;
-  if (score > 7) { 
+
+  score++;
+  if (score > 7) {
     stopTimer();
     time = getTime();
     modal.innerHTML = `<p><strong>Time:</strong> ${time}</p><p><strong>Stars:</strong> ${starCount}</p><p><strong>Moves:</strong> ${moveCount}</p>`;
@@ -217,7 +215,9 @@ const incorrectMatch = (card1, card2)  => {
   card1.classList.add('deck__card--fail');
   card1.classList.remove('deck__card--open');
   card2.classList.add('deck__card--show', 'deck__card--fail');
+
   // Add delay
+
   setTimeout( () => {
     card1.classList.remove('deck__card--fail', 'deck__card--show');
     card2.classList.remove('deck__card--fail', 'deck__card--show');}, 500)
@@ -234,6 +234,7 @@ const cardMatch = evt => {
     startTimer();
     isTimerOn = true;
   }
+
   if (evt.target.nodeName === 'LI' && clicked === true && evt.target.classList.contains('deck__card--match') === false && evt.target.classList.contains('deck__card--show') === false) {
     secondCard = evt.target;
     secondCardClass = secondCard.children[0].classList[1];
@@ -253,5 +254,3 @@ shuffleCards();
 deck.addEventListener('click', cardMatch);
 reset.addEventListener('click', resetGame);
 playAgain.addEventListener('click', resetGame);
-
-
