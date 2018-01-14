@@ -8,7 +8,7 @@ const modal = document.querySelector('.modal-body');
 const timer = document.querySelector('#score__timer');
 const reset = document.querySelector('.score__restart');
 const playAgain = document.querySelector('.play-again');
-let win;
+let win = false;
 let time;
 let isTimerOn = false;
 let timerVar;
