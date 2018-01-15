@@ -285,8 +285,9 @@ h1 {
 
   .score__restart,
   .score__timer,
-  .score__moves {
-    margin-left: 1em;
+  .score__moves,
+  .score__stars {
+    margin-left: .5em;
   }
 }
 
