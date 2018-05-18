@@ -1,1 +1,130 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>Memory Match Game</title><!--Boostrap CSS--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"><!--Custom CSS--><link rel="stylesheet" href="css/app.css"><!--Google Fonts--><link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda"><link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet"><!--Font Awesome 5--><script defer="defer" src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script><!--Custom JS--><script defer="defer" src="js/app.js"></script></head><body><div class="container"><header><div class="header"><h1 class="header__text">Memory Match Game</h1></div></header><section class="score"><ul class="score__stars"><li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li></ul><div id="timer" class="score__timer">00:00</div><div class="score__move-count"><span class="score__moves">0</span> Moves</div><div class="score__restart"><i class="fas fa-sync"></i></div></section><main><ul class="deck"><li class="deck__card"><i class="fas fa-rocket"></i></li><li class="deck__card"><i class="fas fa-cloud"></i></li><li class="deck__card"><i class="fas fa-heart"></i></li><li class="deck__card"><i class="fas fa-star"></i></li><li class="deck__card"><i class="fas fa-comment"></i></li><li class="deck__card"><i class="fas fa-coffee"></i></li><li class="deck__card"><i class="fas fa-code"></i></li><li class="deck__card"><i class="fas fa-headphones"></i></li><li class="deck__card"><i class="fas fa-cloud"></i></li><li class="deck__card"><i class="fas fa-rocket"></i></li><li class="deck__card"><i class="fas fa-headphones"></i></li><li class="deck__card"><i class="fas fa-coffee"></i></li><li class="deck__card"><i class="fas fa-code"></i></li><li class="deck__card"><i class="fas fa-comment"></i></li><li class="deck__card"><i class="fas fa-heart"></i></li><li class="deck__card"><i class="fas fa-star"></i></li></ul></main><!--Bootstrap modal--> <button type="button" class="btn btn-info" data-toggle="modal" data-target=".success-modal-lg">Large modal</button><div id="success-modal" class="modal fade success-modal-lg" tabindex="-1" role="dialog"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header container"><h5 class="modal-title text-center">Congratulations! You won!</h5></div><div class="modal-body text-center"></div><div class="check text-center"><i class="fas fa-check"></i></div><div class="modal-footer container text-center"><button type="button" class="play-again btn btn-dark">Play again</button></div></div></div></div></div><!--Container end--><!--Bootstrap JS--><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Memory Match Game</title>
+  <!--Boostrap CSS-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+    crossorigin="anonymous">
+  <!--Custom CSS-->
+  <link rel="stylesheet" href="css/app.css">
+  <!--Google Fonts-->
+  <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+  <!--Font Awesome 5-->
+  <script defer="defer" src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+  <!--Custom JS-->
+  <script defer="defer" src="js/app.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="header">
+        <h1 class="header__text">Memory Match Game</h1>
+      </div>
+    </header>
+    <section class="score">
+      <ul class="score__stars">
+        <li>
+          <i class="fas fa-star"></i>
+        </li>
+        <li>
+          <i class="fas fa-star"></i>
+        </li>
+        <li>
+          <i class="fas fa-star"></i>
+        </li>
+      </ul>
+      <div id="timer" class="score__timer">00:00</div>
+      <div class="score__move-count">
+        <span class="score__moves">0</span> Moves</div>
+      <div class="score__restart">
+        <i class="fas fa-sync"></i>
+      </div>
+    </section>
+    <main>
+      <ul class="deck">
+        <li class="deck__card">
+          <i class="fas fa-rocket"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-cloud"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-heart"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-star"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-comment"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-coffee"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-code"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-headphones"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-cloud"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-rocket"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-headphones"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-coffee"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-code"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-comment"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-heart"></i>
+        </li>
+        <li class="deck__card">
+          <i class="fas fa-star"></i>
+        </li>
+      </ul>
+    </main>
+    <!--Bootstrap modal-->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".success-modal-lg">Large modal</button>
+    <div id="success-modal" class="modal fade success-modal-lg" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header container">
+            <h5 class="modal-title text-center">Congratulations! You won!</h5>
+          </div>
+          <div class="modal-body text-center"></div>
+          <div class="check text-center">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="modal-footer container text-center">
+            <button type="button" class="play-again btn btn-dark">Play again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Container end-->
+  <!--Bootstrap JS-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
