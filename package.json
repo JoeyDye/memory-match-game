@@ -18,7 +18,7 @@
     "pump": "^3.0.0"
   },
   "scripts": {
-    "postinstall": "npm i && gulp"
+    "preinstall": "npm install && gulp"
   },
   "repository": {
     "type": "git",
