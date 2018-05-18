@@ -1,0 +1,33 @@
+{
+  "name": "memory-match-game",
+  "version": "1.0.0",
+  "description": "The memory match game is a play off the classic game known as **Concentration**. The game starts with all cards laid face down. The player then begins flipping over two cards at a time.",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-clean-css": "^3.9.4",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "pump": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeyDye/memory-match-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoeyDye/memory-match-game/issues"
+  },
+  "homepage": "https://github.com/JoeyDye/memory-match-game#readme"
+}
