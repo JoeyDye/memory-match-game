@@ -53,4 +53,4 @@ gulp.task('img', () => {
     .pipe(gulp.dest('dist/img'));
 });
 
-gulp.task('default', ['html', 'css', 'js', 'img']);
+gulp.task('default', gulp.parallel('html', 'css', 'js', 'img'));
