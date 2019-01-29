@@ -19,9 +19,7 @@
     "gulp-imagemin": "^5.0.3"
   },
   "devDependencies": {},
-  "scripts": {
-    "heroku-postbuild": "npm install && gulp"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JoeyDye/memory-match-game.git"
