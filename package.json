@@ -2,6 +2,9 @@
   "name": "memory-match-game",
   "version": "1.0.0",
   "description": "The memory match game is a play off the classic game known as **Concentration**. The game starts with all cards laid face down. The player then begins flipping over two cards at a time.",
+  "engines": {
+    "node": "10.3.0"
+  },
   "main": "gulpfile.js",
   "dependencies": {
     "babel-core": "^6.26.3",
@@ -12,13 +15,12 @@
     "gulp-htmlmin": "^4.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
-    "pump": "^3.0.0"
-  },
-  "devDependencies": {
+    "pump": "^3.0.0",
     "gulp-imagemin": "^5.0.3"
   },
+  "devDependencies": {},
   "scripts": {
-    "heroku-postbuild": "npm install && gulp"
+    "postinstall": "npm install && gulp"
   },
   "repository": {
     "type": "git",
