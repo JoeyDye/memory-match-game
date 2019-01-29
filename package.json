@@ -20,7 +20,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "postinstall": "npm install && gulp"
+    "heroku-postbuild": "npm install && gulp"
   },
   "repository": {
     "type": "git",
