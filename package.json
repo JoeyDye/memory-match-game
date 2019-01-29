@@ -20,7 +20,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "heroku-prebuild": "gulp"
+    "heroku-prebuild": "npm install && gulp"
   },
   "repository": {
     "type": "git",
